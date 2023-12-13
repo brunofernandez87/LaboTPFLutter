@@ -34,19 +34,22 @@ class PeliculaRecomendada extends StatelessWidget{
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             FloatingActionButton(
+            heroTag: "fab_dislike", 
           onPressed:(){
           },
           backgroundColor: Color.fromARGB(255, 170, 6, 6),
           child: const Icon(Icons.thumb_down_rounded),
           ),
-          FloatingActionButton(          
+          FloatingActionButton(
+            heroTag: "fab_like",           
             onPressed:(){
              print ("hola");
           },
           backgroundColor: Color.fromARGB(255, 39, 123, 201),
           child: const Icon(Icons.thumb_up_alt_rounded),
           ),
-          FloatingActionButton(          
+          FloatingActionButton(
+            heroTag: "fab_next",          
             onPressed:(){
           print("Next");
           },
