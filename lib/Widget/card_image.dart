@@ -5,12 +5,7 @@ class CardImage extends StatefulWidget {
   String? text;
   String? subtext;
 
-  CardImage({
-    super.key,
-    required this.url,
-    this.text,
-    this.subtext
-  });
+  CardImage({super.key, required this.url, this.text, this.subtext});
 
   @override
   State<CardImage> createState() => _CardImageState();
@@ -34,7 +29,7 @@ class _CardImageState extends State<CardImage> {
             padding: const EdgeInsets.all(10),
             alignment: Alignment.bottomLeft,
             child: Text(
-              widget.text ?? '', 
+              widget.text ?? '',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -42,21 +37,22 @@ class _CardImageState extends State<CardImage> {
             ),
           ),
           Container(
-            child: Text(
-              widget.subtext ?? '',
-              style: TextStyle(
-                fontSize: 10,
-                fontWeight: FontWeight.bold,
-              )
-            ),
+            child: Text(widget.subtext ?? '',
+                style: TextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.bold,
+                )),
           ),
-          ElevatedButton(onPressed:() {
-            setState((){
-              IconoRelleno= !IconoRelleno;
-            });
-          }, child: Icon(
-            IconoRelleno ? Icons.thumb_up_alt : Icons.thumb_up_alt_outlined
-          ),)
+          ElevatedButton(
+            onPressed: () {
+              setState(() {
+                IconoRelleno = !IconoRelleno;
+              });
+            },
+            child: Icon(IconoRelleno
+                ? Icons.thumb_up_alt
+                : Icons.thumb_up_alt_outlined),
+          )
         ],
       ),
     );

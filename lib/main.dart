@@ -18,10 +18,11 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: 'home',
         routes: {
-          'home':(context) => HomeScreen (),
-          'favorita':(context) => PeliculaFavorita(),
-          'recomendada':(context) => PeliculaRecomendada()
-        }
-      );
+          'home': (context) => HomeScreen(),
+          'favorita': (context) => PeliculaFavorita(),
+          'recomendada': (context) => PeliculaRecomendada(),
+          'favorita_TvSeries': (context) => TvSeriesFavorita(),
+          'recomendada_TvSeries': (context) => TvSeriesRecomendada()
+        });
   }
 }
