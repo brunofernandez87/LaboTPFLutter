@@ -16,7 +16,7 @@ class TvSeriesFavorita extends StatelessWidget {
         separatorBuilder: (context, index) {
           return Divider(
               height:
-                  5); // Ajusta la altura del separador según tus preferencias
+                  5);
         },
         itemBuilder: (context, index) {
           return CardImage(

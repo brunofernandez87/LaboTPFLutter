@@ -13,16 +13,16 @@ class PeliculaRecomendada extends StatefulWidget{
 
 class _PeliculaRecomendadaState extends State<PeliculaRecomendada> {
   final List peliculas=[
-    {"titulo":"Flash","url":"assets/images/Flash.jpg"},
-    {"titulo":"SawX","url":"assets/images/Saw.jpg"},
-    {"titulo":"Scary Movie 4","url":"assets/images/Scary movie.jpg"},
-    {"titulo":"Blue Bettle","url":"assets/images/Blue Bettle.jpg"},
-    {"titulo":"John Wick 4","url":"assets/images/John Wick 4.jpg"},
-    {"titulo":"Leo","url":"assets/images/Leo.jpg"},
-    {"titulo":"Five Nights at Freddy: La pelicula","url":"assets/images/Five Nights.jpg"},
-    {"titulo":"Los juegos del hambre la balada de pajaros cantores y serpientes","url":"assets/images/Los juegos del hambre.jpg"},
-    {"titulo":"Barbie","url":"assets/images/Barbie.jpg"},
-    {"titulo":"Avatar el camino del agua","url":"assets/images/avatar.jpg"}
+    {"titulo":"Flash","url":"assets/images_peliculas/Flash.jpg"},
+    {"titulo":"SawX","url":"assets/images_peliculas/Saw.jpg"},
+    {"titulo":"Scary Movie 4","url":"assets/images_peliculas/Scary movie.jpg"},
+    {"titulo":"Blue Bettle","url":"assets/images_peliculas/Blue Bettle.jpg"},
+    {"titulo":"John Wick 4","url":"assets/images_peliculas/John Wick 4.jpg"},
+    {"titulo":"Leo","url":"assets/images_peliculas/Leo.jpg"},
+    {"titulo":"Five Nights at Freddy: La pelicula","url":"assets/images_peliculas/Five Nights.jpg"},
+    {"titulo":"Los juegos del hambre la balada de pajaros cantores y serpientes","url":"assets/images_peliculas/Los juegos del hambre.jpg"},
+    {"titulo":"Barbie","url":"assets/images_peliculas/Barbie.jpg"},
+    {"titulo":"Avatar el camino del agua","url":"assets/images_peliculas/avatar.jpg"}
   ];
   List peliculas_puntuadas=[
   ];
