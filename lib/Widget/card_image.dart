@@ -27,6 +27,7 @@ class _CardImageState extends State<CardImage> {
         children: [
           Image.asset(widget.url,
             width: size.width*0.98,
+            height: size.height*0.7
           ),
           Container(
             padding: const EdgeInsets.all(10),
@@ -39,13 +40,11 @@ class _CardImageState extends State<CardImage> {
               ),
             ),
           ),
-          Container(
-            child: Text(widget.subtext ?? '',
-                style: TextStyle(
-                  fontSize: 10,
-                  fontWeight: FontWeight.bold,
-                )),
-          ),
+          Text(widget.subtext ?? '',
+              style: TextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.bold,
+              )),
           ElevatedButton(
             onPressed: () {
               setState(() {

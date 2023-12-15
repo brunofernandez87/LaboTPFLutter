@@ -1,5 +1,4 @@
 import 'package:app_laboflutter/Widget/Drawer_menu.dart';
-import 'package:app_laboflutter/Widget/card_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -44,6 +43,7 @@ class _PeliculaRecomendadaState extends State<PeliculaRecomendada> {
             if(indice<peliculas.length)
                Image.asset(peliculas[indice]["url"],
                width: size.width*0.98,
+               height: size.height*0.7,
               )
             else
               Text("no hay mas peliculas")
@@ -67,8 +67,6 @@ class _PeliculaRecomendadaState extends State<PeliculaRecomendada> {
             FloatingActionButton(
             heroTag: "fab_history", 
           onPressed:(){
-            var largo_fav=peliculas_puntuadas.length;
-            var largo=peliculas.length;
             showDialog(context: context, builder: (BuildContext context){
               return AlertDialog(
                 title: Text("Peliculas que puntuaste"),

@@ -1,5 +1,4 @@
 import 'package:app_laboflutter/Widget/Drawer_menu.dart';
-import 'package:app_laboflutter/Widget/card_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -77,6 +76,7 @@ class _TvSeriesRecomendadaState extends State<TvSeriesRecomendada> {
             if (indice < tvseries.length)
                Image.asset(tvseries[indice]["url"],
                width: size.width*0.98,
+               height: size.height*0.7
                )
             else
               Text("No hay mas series")
@@ -96,8 +96,6 @@ class _TvSeriesRecomendadaState extends State<TvSeriesRecomendada> {
             FloatingActionButton(
               heroTag: "fab_history",
               onPressed: () {
-                var largo_fav = tvseries_puntuadas.length;
-                var largo = tvseries.length;
                 showDialog(
                     context: context,
                     builder: (BuildContext context) {

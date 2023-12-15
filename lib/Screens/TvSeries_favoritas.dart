@@ -80,7 +80,7 @@ List<CardImage> tvSeriesList = [
     url: 'assets/images_TvSeries/Sherlock.jpg',
     text: "Sherlock",
     subtext:
-        "Modern adaptation of Arthur Conan Doyle\'s classic detective stories.",
+        "Modern adaptation of Arthur Conan Doyle's classic detective stories.",
   ),
   CardImage(
     url: 'assets/images_TvSeries/Westworld.jpg',

@@ -44,10 +44,9 @@ class DrawerMenu extends StatelessWidget {
                         subtitle: Text(item['subtitle'] ?? '',
                             style: const TextStyle(
                                 fontFamily: 'RobotoMono', fontSize: 11)),
-                        leading: const Icon(Icons.arrow_right),
+                        leading: const Icon(Icons.video_camera_front_sharp),
                         onTap: () {
                           Navigator.pop(context);
-                          //Navigator.pushReplacementNamed(context, item['route']!);
                           Navigator.pushNamed(context, item['route']!);
                         },
                       ))
@@ -68,58 +67,12 @@ class _DrawerHeaderAlternative extends StatelessWidget {
     return DrawerHeader(
       padding: EdgeInsets.zero,
       child: Stack(children: [
-        Positioned(
-          top: -90,
-          child: Container(
-            width: 130,
-            height: 130,
-            decoration: BoxDecoration(
-                color: Colors.blueAccent.withOpacity(0.5),
-                borderRadius: BorderRadius.circular(10)),
-            transform: Matrix4.rotationZ(0.2),
-          ),
-        ),
-        Positioned(
-          bottom: 0,
-          left: 140,
-          child: Container(
-            width: 100,
-            height: 100,
-            decoration: BoxDecoration(
-                color: Colors.redAccent.withOpacity(0.4),
-                borderRadius: BorderRadius.circular(10)),
-            transform: Matrix4.rotationZ(0.9),
-          ),
-        ),
-        Positioned(
-          top: 30,
-          right: 35,
-          child: Container(
-            width: 50,
-            height: 50,
-            decoration: BoxDecoration(
-                color: Colors.amber.withOpacity(0.4),
-                borderRadius: BorderRadius.circular(10)),
-            transform: Matrix4.rotationZ(0.9),
-          ),
-        ),
-        Positioned(
-          top: 70,
-          right: -10,
-          child: Container(
-            width: 30,
-            height: 30,
-            decoration: BoxDecoration(
-                color: Colors.green.withOpacity(0.4),
-                borderRadius: BorderRadius.circular(5)),
-            transform: Matrix4.rotationZ(0.9),
-          ),
-        ),
+        Image.asset("assets/images_Peliculas/Flash.jpg"),
         Container(
-          alignment: Alignment.bottomRight,
+          alignment: Alignment.bottomCenter,
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: const Text(
-            '[  Menu  ]',
+            'Menu ',
             style: TextStyle(
                 fontSize: 13, color: Colors.black54, fontFamily: 'RobotoMono'),
             textAlign: TextAlign.right,
