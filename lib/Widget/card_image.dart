@@ -12,7 +12,7 @@ class CardImage extends StatefulWidget {
 }
 
 class _CardImageState extends State<CardImage> {
-  bool IconoRelleno = true;
+  bool IconoRelleno = false;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -27,9 +27,7 @@ class _CardImageState extends State<CardImage> {
       child: Column(
         children: [
           Image.asset(widget.url,
-            width: size.width*0.98,
-            height: size.height*0.7
-          ),
+              width: size.width * 0.98, height: size.height * 0.7),
           Container(
             padding: const EdgeInsets.all(10),
             alignment: Alignment.bottomCenter,
