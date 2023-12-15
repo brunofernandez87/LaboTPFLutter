@@ -42,7 +42,8 @@ class _PeliculaRecomendadaState extends State<PeliculaRecomendada> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             if(indice<peliculas.length)
-                CardImage2(url:peliculas[indice]["url"])
+               Image.asset(peliculas[indice]["url"],
+               )
             else
               Text("no hay mas peliculas")
             ]
