@@ -54,7 +54,6 @@ class _CardImageState extends State<CardImage> {
                   IconoRelleno = !IconoRelleno;
                 });
               },
-              style: ButtonStyle(),
               child: Icon(IconoRelleno
                   ? Icons.thumb_up_alt
                   : Icons.thumb_up_alt_outlined),

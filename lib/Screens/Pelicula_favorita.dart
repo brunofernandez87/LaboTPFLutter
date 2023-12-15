@@ -7,7 +7,7 @@ class PeliculaFavorita extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Peliculas favoritas"),
+        title: const Text("Peliculas"),
         centerTitle: true,
       ),
       drawer: DrawerMenu(),
