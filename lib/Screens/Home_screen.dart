@@ -7,24 +7,26 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Color.fromRGBO(24, 26, 49, 1),
       appBar: AppBar(
-        title: const Text('Bienvenido a peliculas BLES'),
+        title: const Text('Inicio'),
         centerTitle: true,
-                
       ),
       drawer: DrawerMenu(),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
-        child: Column(
-          children: [
-            const SizedBox(height: 20,),
-            CardSwiper()
-
-            ]
-            ),
-      ),          
+        child: Column(children: [
+          Image.asset(
+            "assets/img_logo/logo.png",
+            width: size.width * 0.98,
+            height: size.height * 0.15,
+          ),
+          CardSwiper(),
+          CardSwiper()
+        ]),
+      ),
       // body: Center(
       //   child:
       //  Image.asset("assets/img_logo/logo.png")

@@ -32,7 +32,7 @@ class DrawerMenu extends StatelessWidget {
         children: [
           const _DrawerHeaderAlternative(),
           ...ListTile.divideTiles(
-            color: Colors.amber,
+              color: Colors.amber,
               context: context,
               tiles: _menuItems
                   .map((item) => ListTile(
@@ -42,16 +42,14 @@ class DrawerMenu extends StatelessWidget {
                         minLeadingWidth: 25,
                         iconColor: Colors.blueGrey,
                         title: Text(item['title']!,
-                            style: const TextStyle(fontFamily: 'FuzzyBubbles',
-                            color: Colors.white
-                            )
-                            ),
+                            style: const TextStyle(
+                                fontFamily: 'FuzzyBubbles',
+                                color: Colors.white)),
                         subtitle: Text(item['subtitle'] ?? '',
                             style: const TextStyle(
-                                fontFamily: 'RobotoMono', fontSize: 11,
-                                color: Colors.white
-                                )
-                                ),
+                                fontFamily: 'RobotoMono',
+                                fontSize: 11,
+                                color: Colors.white)),
                         leading: const Icon(Icons.video_camera_front_sharp),
                         onTap: () {
                           Navigator.pop(context);
@@ -80,19 +78,10 @@ class _DrawerHeaderAlternative extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
-              child: Image.asset("assets/img_logo/logo.png",
+              child: Image.asset(
+                "assets/img_logo/logo.png",
               ),
             ),
-          ),
-        ),
-        Container(
-          alignment: Alignment.bottomCenter,
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: const Text(
-            'Menu ',
-            style: TextStyle(
-                fontSize: 13, color: Color.fromARGB(255, 255, 255, 255), fontFamily: 'RobotoMono'),
-            textAlign: TextAlign.right,
           ),
         ),
       ]),
