@@ -1,4 +1,5 @@
 import 'package:app_laboflutter/Widget/Drawer_menu.dart';
+import 'package:app_laboflutter/Widget/card_swipper.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -13,8 +14,21 @@ class HomeScreen extends StatelessWidget {
         centerTitle: true,
                 
       ),
-      drawer: DrawerMenu(),          
-      body: Center(child: Image.asset("assets/img_logo/logo.png")),
+      drawer: DrawerMenu(),
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Column(
+          children: [
+            const SizedBox(height: 20,),
+            CardSwiper()
+
+            ]
+            ),
+      ),          
+      // body: Center(
+      //   child:
+      //  Image.asset("assets/img_logo/logo.png")
+      //  ),
     );
   }
 }
