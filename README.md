@@ -1,16 +1,8 @@
-# app_laboflutter
+# Lab4tup23
 
-A new Flutter project.
+Esta app fue creada para la materia laboratorio 4 y cumple con las siguientes funciones:
+* Home Screen
+* Mostrar una lista de registros
+* Mostrar un registro unico
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+En este prototipo se uso de ejemplo un Pixel 6 API 33(Tiramisu) de medidas Size (6,4"), Resolution (1080 X 2400) y Density (420dpi) 
