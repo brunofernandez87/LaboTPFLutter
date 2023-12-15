@@ -38,7 +38,7 @@ class CardSwiper extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return Card(
                     child: Container(
-                      width: size.width * 0.35,
+                      width: size.width * 0.37,
                       height: size.height * 0.35,
                       margin: const EdgeInsets.symmetric(
                           vertical: 10, horizontal: 10),
@@ -50,7 +50,7 @@ class CardSwiper extends StatelessWidget {
                             borderRadius: BorderRadius.circular(15),
                             child: Image.asset(
                               Lista[index]['url'],
-                              width: size.width * 0.35,
+                              width: size.width * 0.37,
                               height: size.height * 0.19,
                               fit: BoxFit.cover,
                             ),
