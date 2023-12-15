@@ -78,7 +78,10 @@ class _DrawerHeaderAlternative extends StatelessWidget {
         Center(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Image.asset("assets/img_logo/logo.png",
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Image.asset("assets/img_logo/logo.png",
+              ),
             ),
           ),
         ),
