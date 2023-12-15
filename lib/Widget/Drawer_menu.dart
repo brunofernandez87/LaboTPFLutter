@@ -26,11 +26,13 @@ class DrawerMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      backgroundColor: Color.fromRGBO(24, 26, 49, 1),
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
           const _DrawerHeaderAlternative(),
           ...ListTile.divideTiles(
+            color: Colors.amber,
               context: context,
               tiles: _menuItems
                   .map((item) => ListTile(
@@ -40,10 +42,16 @@ class DrawerMenu extends StatelessWidget {
                         minLeadingWidth: 25,
                         iconColor: Colors.blueGrey,
                         title: Text(item['title']!,
-                            style: const TextStyle(fontFamily: 'FuzzyBubbles')),
+                            style: const TextStyle(fontFamily: 'FuzzyBubbles',
+                            color: Colors.white
+                            )
+                            ),
                         subtitle: Text(item['subtitle'] ?? '',
                             style: const TextStyle(
-                                fontFamily: 'RobotoMono', fontSize: 11)),
+                                fontFamily: 'RobotoMono', fontSize: 11,
+                                color: Colors.white
+                                )
+                                ),
                         leading: const Icon(Icons.video_camera_front_sharp),
                         onTap: () {
                           Navigator.pop(context);
@@ -67,14 +75,20 @@ class _DrawerHeaderAlternative extends StatelessWidget {
     return DrawerHeader(
       padding: EdgeInsets.zero,
       child: Stack(children: [
-        Image.asset("assets/images_Peliculas/Flash.jpg"),
+        Center(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset("assets/img_logo/logo.png",
+            ),
+          ),
+        ),
         Container(
           alignment: Alignment.bottomCenter,
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: const Text(
             'Menu ',
             style: TextStyle(
-                fontSize: 13, color: Colors.black54, fontFamily: 'RobotoMono'),
+                fontSize: 13, color: Color.fromARGB(255, 255, 255, 255), fontFamily: 'RobotoMono'),
             textAlign: TextAlign.right,
           ),
         ),

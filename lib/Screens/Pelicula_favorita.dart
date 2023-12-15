@@ -8,6 +8,7 @@ class PeliculaFavorita extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Peliculas favoritas"),
+        centerTitle: true,
       ),
       drawer: DrawerMenu(),
       body: ListView(

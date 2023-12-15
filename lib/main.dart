@@ -1,4 +1,5 @@
 import 'package:app_laboflutter/Screens/Screens.dart';
+import 'package:app_laboflutter/Themes/Default_Theme.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'App labo',
-        theme: ThemeData.light(),
+        theme: DefaultTheme.defaultTheme,
         debugShowCheckedModeBanner: false,
         initialRoute: 'home',
         routes: {

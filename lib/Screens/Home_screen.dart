@@ -7,12 +7,14 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromRGBO(24, 26, 49, 1),
       appBar: AppBar(
-        title: const Text('Bienvenido a peliculas SBEL'),
-        centerTitle: true,        
+        title: const Text('Bienvenido a peliculas BLES'),
+        centerTitle: true,
+                
       ),
       drawer: DrawerMenu(),          
-      body: const Center(child: Text('Lista de peliculas mas populares')),
+      body: Center(child: Image.asset("assets/img_logo/logo.png")),
     );
   }
 }

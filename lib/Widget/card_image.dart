@@ -17,7 +17,7 @@ class _CardImageState extends State<CardImage> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Card(
-      color: Colors.blue,
+      color: Color.fromRGBO(24, 26, 49, 1),
       clipBehavior: Clip.antiAlias,
       shadowColor: Colors.amberAccent,
       shape: RoundedRectangleBorder(
@@ -36,25 +36,29 @@ class _CardImageState extends State<CardImage> {
             child: Text(
               widget.text ?? '',
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
           Text(widget.subtext ?? '',
               style: TextStyle(
-                fontSize: 10,
+                fontSize: 12,
                 fontWeight: FontWeight.bold,
               )),
-          ElevatedButton(
-            onPressed: () {
-              setState(() {
-                IconoRelleno = !IconoRelleno;
-              });
-            },
-            child: Icon(IconoRelleno
-                ? Icons.thumb_up_alt
-                : Icons.thumb_up_alt_outlined),
+          Padding(
+            padding: const EdgeInsets.all(9.0),
+            child: ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  IconoRelleno = !IconoRelleno;
+                });
+              },
+              style: ButtonStyle(),
+              child: Icon(IconoRelleno
+                  ? Icons.thumb_up_alt
+                  : Icons.thumb_up_alt_outlined),
+            ),
           )
         ],
       ),

@@ -31,6 +31,7 @@ class _PeliculaRecomendadaState extends State<PeliculaRecomendada> {
   Widget build(BuildContext context){
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Color.fromRGBO(24, 26, 49, 1),
       appBar: AppBar(
         centerTitle: true,
         title: const Text("Recomendacion de peliculas"),
@@ -133,7 +134,10 @@ class _PeliculaRecomendadaState extends State<PeliculaRecomendada> {
             });
           },
           backgroundColor: Color.fromARGB(255, 39, 123, 201),
-          child: const Icon(Icons.star),
+          child: const Icon(
+            Icons.star,
+            color: Colors.amber,
+            ),
           ),
           FloatingActionButton(
             heroTag: "fab_next",          
