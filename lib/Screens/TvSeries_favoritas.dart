@@ -8,6 +8,8 @@ class TvSeriesFavorita extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("TvSeries favoritas"),
+        backgroundColor: Colors.amber,
+        centerTitle: true,
       ),
       drawer: DrawerMenu(),
       body: ListView.separated(

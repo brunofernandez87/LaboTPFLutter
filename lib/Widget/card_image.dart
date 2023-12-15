@@ -17,6 +17,7 @@ class _CardImageState extends State<CardImage> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Card(
+      color: Colors.blue,
       clipBehavior: Clip.antiAlias,
       shadowColor: Colors.amberAccent,
       shape: RoundedRectangleBorder(
