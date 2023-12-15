@@ -19,6 +19,11 @@ class DrawerMenu extends StatelessWidget {
       'title': 'Recomendada',
       'subtitle': 'TvSeries Recomendada'
     },
+    {
+      'route': 'populares_Actores',
+      'title': 'Tendencia',
+      'subtitle': 'Actores populares'
+    },
   ];
 
   DrawerMenu({super.key});

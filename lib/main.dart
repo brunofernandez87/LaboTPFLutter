@@ -21,7 +21,8 @@ class MyApp extends StatelessWidget {
           'favorita': (context) => PeliculaFavorita(),
           'recomendada': (context) => PeliculaRecomendada(),
           'favorita_TvSeries': (context) => TvSeriesFavorita(),
-          'recomendada_TvSeries': (context) => TvSeriesRecomendada()
+          'recomendada_TvSeries': (context) => TvSeriesRecomendada(),
+          'populares_Actores': ((context) => ActoresPopulares())
         });
   }
 }
