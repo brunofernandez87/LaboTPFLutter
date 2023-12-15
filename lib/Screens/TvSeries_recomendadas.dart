@@ -1,6 +1,5 @@
 import 'package:app_laboflutter/Widget/Drawer_menu.dart';
 import 'package:app_laboflutter/Widget/card_image.dart';
-import 'package:app_laboflutter/Widget/card_image2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -64,9 +63,9 @@ class _TvSeriesRecomendadaState extends State<TvSeriesRecomendada> {
   List tvseries_puntuadas = [];
 
   var indice = 0;
-
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
@@ -76,7 +75,9 @@ class _TvSeriesRecomendadaState extends State<TvSeriesRecomendada> {
         body: Center(
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             if (indice < tvseries.length)
-              CardImage2(url: tvseries[indice]["url"])
+               Image.asset(tvseries[indice]["url"],
+               width: size.width*0.98,
+               )
             else
               Text("No hay mas series")
           ]),

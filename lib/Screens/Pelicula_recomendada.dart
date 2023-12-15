@@ -1,6 +1,5 @@
 import 'package:app_laboflutter/Widget/Drawer_menu.dart';
 import 'package:app_laboflutter/Widget/card_image.dart';
-import 'package:app_laboflutter/Widget/card_image2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -13,16 +12,16 @@ class PeliculaRecomendada extends StatefulWidget{
 
 class _PeliculaRecomendadaState extends State<PeliculaRecomendada> {
   final List peliculas=[
-    {"titulo":"Flash","url":"assets/images_peliculas/Flash.jpg"},
-    {"titulo":"SawX","url":"assets/images_peliculas/Saw.jpg"},
-    {"titulo":"Scary Movie 4","url":"assets/images_peliculas/Scary movie.jpg"},
-    {"titulo":"Blue Bettle","url":"assets/images_peliculas/Blue Bettle.jpg"},
-    {"titulo":"John Wick 4","url":"assets/images_peliculas/John Wick 4.jpg"},
-    {"titulo":"Leo","url":"assets/images_peliculas/Leo.jpg"},
-    {"titulo":"Five Nights at Freddy: La pelicula","url":"assets/images_peliculas/Five Nights.jpg"},
-    {"titulo":"Los juegos del hambre la balada de pajaros cantores y serpientes","url":"assets/images_peliculas/Los juegos del hambre.jpg"},
-    {"titulo":"Barbie","url":"assets/images_peliculas/Barbie.jpg"},
-    {"titulo":"Avatar el camino del agua","url":"assets/images_peliculas/avatar.jpg"}
+    {"titulo":"Flash","url":"assets/images_Peliculas/Flash.jpg"},
+    {"titulo":"SawX","url":"assets/images_Peliculas/Saw.jpg"},
+    {"titulo":"Scary Movie 4","url":"assets/images_Peliculas/Scary movie.jpg"},
+    {"titulo":"Blue Bettle","url":"assets/images_Peliculas/Blue Bettle.jpg"},
+    {"titulo":"John Wick 4","url":"assets/images_Peliculas/John Wick 4.jpg"},
+    {"titulo":"Leo","url":"assets/images_Peliculas/Leo.jpg"},
+    {"titulo":"Five Nights at Freddy: La pelicula","url":"assets/images_Peliculas/Five Nights.jpg"},
+    {"titulo":"Los juegos del hambre la balada de pajaros cantores y serpientes","url":"assets/images_Peliculas/Los juegos del hambre.jpg"},
+    {"titulo":"Barbie","url":"assets/images_Peliculas/Barbie.jpg"},
+    {"titulo":"Avatar el camino del agua","url":"assets/images_Peliculas/avatar.jpg"}
   ];
   List peliculas_puntuadas=[
   ];
@@ -31,6 +30,7 @@ class _PeliculaRecomendadaState extends State<PeliculaRecomendada> {
 
   @override
   Widget build(BuildContext context){
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -43,7 +43,8 @@ class _PeliculaRecomendadaState extends State<PeliculaRecomendada> {
           children: [
             if(indice<peliculas.length)
                Image.asset(peliculas[indice]["url"],
-               )
+               width: size.width*0.98,
+              )
             else
               Text("no hay mas peliculas")
             ]

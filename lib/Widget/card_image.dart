@@ -15,6 +15,7 @@ class _CardImageState extends State<CardImage> {
   bool IconoRelleno = true;
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Card(
       clipBehavior: Clip.antiAlias,
       shadowColor: Colors.amberAccent,
@@ -24,10 +25,12 @@ class _CardImageState extends State<CardImage> {
       elevation: 10,
       child: Column(
         children: [
-          Image.asset(widget.url),
+          Image.asset(widget.url,
+            width: size.width*0.98,
+          ),
           Container(
             padding: const EdgeInsets.all(10),
-            alignment: Alignment.bottomLeft,
+            alignment: Alignment.bottomCenter,
             child: Text(
               widget.text ?? '',
               style: TextStyle(
