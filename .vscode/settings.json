@@ -1,3 +1,4 @@
 {
-    "cmake.configureOnOpen": true
+    "cmake.configureOnOpen": true,
+    "cmake.sourceDirectory": "D:/Sofi/UTN/2do año/2do cuatrimestre/Lab4/APP - Dart - Flutter/LaboTPFLutter/linux"
 }
