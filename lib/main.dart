@@ -1,9 +1,18 @@
 import 'package:app_laboflutter/Screens/Screens.dart';
 import 'package:app_laboflutter/Themes/Default_Theme.dart';
+import 'package:app_laboflutter/providers/actores_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(
+        create: (context) => ActorProvider(),
+      )
+    ],
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
