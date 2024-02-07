@@ -11,7 +11,14 @@ class PeliculaFavorita extends StatelessWidget {
         centerTitle: true,
       ),
       drawer: DrawerMenu(),
-      body: ListView(
+      body: RefreshIndicator(
+            color: Colors.white,
+            backgroundColor: Colors.red,
+            strokeWidth: 4.0,
+            displacement: 40,                                
+            onRefresh: () async {
+              ;             
+            },child:ListView(
         physics: BouncingScrollPhysics(),
         children: [
           CardImage(
@@ -76,6 +83,6 @@ class PeliculaFavorita extends StatelessWidget {
           )
         ],
       ),
-    );
+    ));
   }
 }

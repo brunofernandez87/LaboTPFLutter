@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:app_laboflutter/Widget/Drawer_menu.dart';
+import 'package:app_laboflutter/providers/peliculas_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -24,11 +27,13 @@ class _PeliculaRecomendadaState extends State<PeliculaRecomendada> {
   ];
   List peliculas_puntuadas=[
   ];
-
+  var random=Random();
   var indice=0;
+  final pelicula=PeliculaProvider();
 
   @override
   Widget build(BuildContext context){
+    int IDrandom=random.nextInt(1000);
     final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Color.fromRGBO(24, 26, 49, 1),
@@ -37,20 +42,25 @@ class _PeliculaRecomendadaState extends State<PeliculaRecomendada> {
         title: const Text("Recomendacion de peliculas"),
       ),
       drawer: DrawerMenu(),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            if(indice<peliculas.length)
-               Image.asset(peliculas[indice]["url"],
-               width: size.width*0.98,
-               height: size.height*0.7,
-              )
-            else
-              Text("no hay mas peliculas")
-            ]
-            ),
-      ),
+      body: FutureBuilder(
+        future: pelicula.getPeliculasData(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+    if (snapshot.connectionState == ConnectionState.waiting) {
+      // Si el Future está en espera, muestra un indicador de carga
+      return Center(child: CircularProgressIndicator());
+    } else if (snapshot.hasError) {
+      // Si hay un error en la obtención de los datos, muestra un mensaje de error
+      return Center(child: Text('Error: ${snapshot.error}'));
+    } else {
+      // Si los datos se han obtenido correctamente, muestra la imagen
+      return FadeInImage(            
+        placeholder: const AssetImage("assets/images_Peliculas/Krampus.jpg"), 
+        image: NetworkImage(pelicula.obtenerURLIMagen(),
+        scale: 0.1,
+        ),
+        );
+    }
+    },),
       
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       // floatingActionButtonAnimator: 
@@ -140,14 +150,23 @@ class _PeliculaRecomendadaState extends State<PeliculaRecomendada> {
             ),
           ),
           FloatingActionButton(
+            backgroundColor: Colors.black54,
+            heroTag: "fab_refresh",
+            onPressed:(() {
+             print(IDrandom); 
+            }),
+            child: const Icon(Icons.autorenew),
+            ),
+          FloatingActionButton(
             heroTag: "fab_next",          
             onPressed:(){setState(() {
               indice=indice+1;
+              int IDrandom=random.nextInt(1000);
             });
           },
           child: const Icon(Icons.arrow_forward_outlined),
-          )
-          ]
+          ),
+          ],
           ),
       )
     );
