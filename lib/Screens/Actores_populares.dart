@@ -1,8 +1,10 @@
+import 'dart:math';
+
 import 'package:app_laboflutter/Widget/Drawer_menu.dart';
 import 'package:app_laboflutter/providers/actores_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:provider/provider.dart';
+//import 'package:provider/provider.dart';
 
 class ActoresPopulares extends StatefulWidget {
   ActoresPopulares({super.key});
@@ -12,14 +14,26 @@ class ActoresPopulares extends StatefulWidget {
 }
 
 class _ActoresPopularesState extends State<ActoresPopulares> {
-  List<dynamic> actoresPuntuados = [];
+  ActorProvider actorProvider = ActorProvider();
+  List actoresPuntuados = [];
 
+  var random = Random();
   var indice = 0;
+
   @override
   Widget build(BuildContext context) {
-    final ActorProvider actorProvider = Provider.of<ActorProvider>(context);
+    //final ActorProvider actorProvider = Provider.of<ActorProvider>(context);
+
+    //for (var i = 0; i < actorProvider.jsonData.length; i++) {
+    //  actores.add(
+    //      {"nombre": "a", "url": "assets/images_Actores/Farrah Mackenzie.jpg"});
+    //  i++;
+    //}
+
+    //print(actores);
 
     final size = MediaQuery.of(context).size;
+
     return Scaffold(
         backgroundColor: Color.fromRGBO(24, 26, 49, 1),
         appBar: AppBar(
@@ -27,29 +41,29 @@ class _ActoresPopularesState extends State<ActoresPopulares> {
           title: const Text("Actores Populares"),
         ),
         drawer: DrawerMenu(),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              if (indice < actorProvider.actoresData.length)
-                Column(
-                  children: [
-                    Image.asset(
-                      actorProvider.actoresData[indice]["url"],
-                      width: size.width * 0.98,
-                      height: size.height * 0.5,
-                    ),
-                    Text(
-                      actorProvider.actoresData[indice]["nombre"],
-                      style: TextStyle(
-                          fontSize: 18.0, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                )
-              else
-                Text("No hay más actores"),
-            ],
-          ),
+        body: FutureBuilder(
+          future: actorProvider.getActoresData(),
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              // Si el Future está en espera, muestra un indicador de carga
+              return Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError) {
+              // Si hay un error en la obtención de los datos, muestra un mensaje de error
+              return Center(child: Text('Error: ${snapshot.error}'));
+            } else {
+              String imagen = actorProvider.obtenerURLIMagen();
+              // Si los datos se han obtenido correctamente, muestra la imagen
+              return FadeInImage(
+                placeholder:
+                    const AssetImage("assets/images_Peliculas/Krampus.jpg"),
+                image: NetworkImage(
+                  "https://image.tmdb.org/t/p$imagen",
+                ),
+                width: size.width * 0.98,
+                height: size.height * 0.7,
+              );
+            }
+          },
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         // floatingActionButtonAnimator:
@@ -103,54 +117,33 @@ class _ActoresPopularesState extends State<ActoresPopulares> {
                       double puntuacion = 0;
                       return AlertDialog(
                         title: Text("Actor para puntuar"),
-                        content: Column(children: [
-                          Text("Puntua el actor"),
-                          RatingBar.builder(
-                            initialRating: 3,
-                            itemCount: 5,
-                            itemBuilder: (context, index) {
-                              switch (index) {
-                                case 0:
-                                  return Icon(
-                                    Icons.sentiment_very_dissatisfied,
-                                    color: Colors.red,
-                                  );
-                                case 1:
-                                  return Icon(
-                                    Icons.sentiment_dissatisfied,
-                                    color: Colors.redAccent,
-                                  );
-                                case 2:
-                                  return Icon(
-                                    Icons.sentiment_neutral,
-                                    color: Colors.amber,
-                                  );
-                                case 3:
-                                  return Icon(
-                                    Icons.sentiment_satisfied,
-                                    color: Colors.lightGreen,
-                                  );
-                                case 4:
-                                  return Icon(
-                                    Icons.sentiment_very_satisfied,
-                                    color: Colors.green,
-                                  );
-                              }
-                              return Icon(Icons.sentiment_dissatisfied,
-                                  color: Colors.redAccent);
-                            },
-                            onRatingUpdate: (rating) {
-                              puntuacion = rating;
-                            },
-                          ),
-                        ]),
+                        content: Column(
+                          children: [
+                            Text("Puntua la pelicula"),
+                            RatingBar.builder(
+                              initialRating: 3,
+                              minRating: 1,
+                              direction: Axis.horizontal,
+                              allowHalfRating: true,
+                              itemCount: 5,
+                              itemPadding:
+                                  EdgeInsets.symmetric(horizontal: 4.0),
+                              itemBuilder: (context, _) => Icon(
+                                Icons.star,
+                                color: Colors.amber,
+                              ),
+                              onRatingUpdate: (rating) {
+                                puntuacion = rating;
+                              },
+                            ),
+                          ],
+                        ),
                         actions: [
                           TextButton(
                             onPressed: () {
                               setState(() {
                                 actoresPuntuados.add({
-                                  "nombre": actorProvider.actoresData[indice]
-                                      ["nombre"],
+                                  "nombre": actorProvider.obtenerNombre(),
                                   "puntuacion": puntuacion
                                 });
                                 indice = indice + 1;

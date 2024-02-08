@@ -4,23 +4,28 @@ import 'dart:convert';
 
 class ActorProvider extends ChangeNotifier {
   final String _baseUrl = "http://localhost:3050/v1/personas/popularpeople";
-  List<dynamic> actoresData = [];
+  late Map<String, dynamic> jsonData;
 
   Future<void> getActoresData() async {
     final response = await http.get(Uri.parse(_baseUrl));
 
     if (response.statusCode == 200) {
       String body = utf8.decode(response.bodyBytes);
-      final jsonData = json.decode(body);
-
-      for (var element in jsonData["results"]) {
-        actoresData
-            .add({"nombre": element["name"], "url": element["profile_path"]});
-      }
-
+      jsonData = json.decode(body);
       notifyListeners();
     } else {
       throw Exception("error");
     }
   }
+
+  String obtenerURLIMagen() {
+    return jsonData["results"]["profile_path"] ?? "";
+  }
+
+  String obtenerNombre() {
+    return jsonData["data"]["name"] ?? "";
+  }
 }
+
+//String baseImgUrl =
+//        "https://image.tmdb.org/t/p${pelicula.obtenerURLIMagen()}";
