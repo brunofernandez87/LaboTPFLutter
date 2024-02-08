@@ -29,11 +29,10 @@ class _PeliculaRecomendadaState extends State<PeliculaRecomendada> {
   ];
   var random=Random();
   var indice=0;
-  final pelicula=PeliculaProvider();
+  PeliculaProvider pelicula=PeliculaProvider();
 
   @override
   Widget build(BuildContext context){
-    int IDrandom=random.nextInt(1000);
     final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Color.fromRGBO(24, 26, 49, 1),
@@ -43,7 +42,7 @@ class _PeliculaRecomendadaState extends State<PeliculaRecomendada> {
       ),
       drawer: DrawerMenu(),
       body: FutureBuilder(
-        future: pelicula.getPeliculasData(),
+        future: pelicula.getPeliculasData(), 
         builder: (BuildContext context, AsyncSnapshot snapshot) {
     if (snapshot.connectionState == ConnectionState.waiting) {
       // Si el Future está en espera, muestra un indicador de carga
@@ -52,13 +51,14 @@ class _PeliculaRecomendadaState extends State<PeliculaRecomendada> {
       // Si hay un error en la obtención de los datos, muestra un mensaje de error
       return Center(child: Text('Error: ${snapshot.error}'));
     } else {
+      String imagen=pelicula.obtenerURLIMagen();
       // Si los datos se han obtenido correctamente, muestra la imagen
-      return FadeInImage(            
-        placeholder: const AssetImage("assets/images_Peliculas/Krampus.jpg"), 
-        image: NetworkImage(pelicula.obtenerURLIMagen(),
-        scale: 0.1,
-        ),
-        );
+      return FadeInImage(placeholder:const AssetImage("assets/images_Peliculas/Flash.jpg"),
+      image: NetworkImage("https://image.tmdb.org/t/p/w500/$imagen",
+      ),
+      width: size.width*0.98,
+      height: size.height*0.7,
+      );
     }
     },),
       
@@ -133,7 +133,7 @@ class _PeliculaRecomendadaState extends State<PeliculaRecomendada> {
                   TextButton(onPressed:(){ 
                     setState(() {
                           peliculas_puntuadas.add({
-                            "titulo":peliculas[indice]["titulo"],
+                            "titulo":pelicula.obtenerTitulo(),
                             "puntuacion": Puntuacion});
                           indice=indice+1;
                       });
@@ -150,18 +150,9 @@ class _PeliculaRecomendadaState extends State<PeliculaRecomendada> {
             ),
           ),
           FloatingActionButton(
-            backgroundColor: Colors.black54,
-            heroTag: "fab_refresh",
-            onPressed:(() {
-             print(IDrandom); 
-            }),
-            child: const Icon(Icons.autorenew),
-            ),
-          FloatingActionButton(
             heroTag: "fab_next",          
             onPressed:(){setState(() {
-              indice=indice+1;
-              int IDrandom=random.nextInt(1000);
+              pelicula.getPeliculasData();
             });
           },
           child: const Icon(Icons.arrow_forward_outlined),
