@@ -1,6 +1,6 @@
 import 'package:app_laboflutter/Widget/Drawer_menu.dart';
 import 'package:app_laboflutter/Widget/card_swipper.dart';
-import 'package:app_laboflutter/providers/actores_provider.dart';
+//import 'package:app_laboflutter/providers/actores_provider.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -11,13 +11,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  ActorProvider actorProvider = ActorProvider();
+  //ActorProvider actorProvider = ActorProvider();
   @override
   Widget build(BuildContext context) {
     const List peliculasyTVseries = [];
     List actores = [];
 
-    actores = actorProvider.obtenerListaActores();
+    //actores = actorProvider.obtenerListaActores();
 
     final size = MediaQuery.of(context).size;
     return Scaffold(
