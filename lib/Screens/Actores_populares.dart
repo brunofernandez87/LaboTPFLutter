@@ -42,7 +42,7 @@ class _ActoresPopularesState extends State<ActoresPopulares> {
         ),
         drawer: DrawerMenu(),
         body: FutureBuilder(
-          future: actorProvider.getActoresData(),
+          future: actorProvider.getActorData(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               // Si el Future está en espera, muestra un indicador de carga
