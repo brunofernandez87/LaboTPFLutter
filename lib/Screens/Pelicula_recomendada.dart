@@ -13,38 +13,16 @@ class PeliculaRecomendada extends StatefulWidget {
 }
 
 class _PeliculaRecomendadaState extends State<PeliculaRecomendada> {
-  final List peliculas = [
-    {"titulo": "Flash", "url": "assets/images_Peliculas/Flash.jpg"},
-    {"titulo": "SawX", "url": "assets/images_Peliculas/Saw.jpg"},
-    {
-      "titulo": "Scary Movie 4",
-      "url": "assets/images_Peliculas/Scary movie.jpg"
-    },
-    {"titulo": "Blue Bettle", "url": "assets/images_Peliculas/Blue Bettle.jpg"},
-    {"titulo": "John Wick 4", "url": "assets/images_Peliculas/John Wick 4.jpg"},
-    {"titulo": "Leo", "url": "assets/images_Peliculas/Leo.jpg"},
-    {
-      "titulo": "Five Nights at Freddy: La pelicula",
-      "url": "assets/images_Peliculas/Five Nights.jpg"
-    },
-    {
-      "titulo":
-          "Los juegos del hambre la balada de pajaros cantores y serpientes",
-      "url": "assets/images_Peliculas/Los juegos del hambre.jpg"
-    },
-    {"titulo": "Barbie", "url": "assets/images_Peliculas/Barbie.jpg"},
-    {
-      "titulo": "Avatar el camino del agua",
-      "url": "assets/images_Peliculas/avatar.jpg"
-    }
-  ];
   List peliculas_puntuadas = [];
-  var random = Random();
-  var indice = 0;
   PeliculaProvider pelicula = PeliculaProvider();
 
   @override
   Widget build(BuildContext context) {
+    try{
+    pelicula.getPeliculasData();
+    }catch(error){
+      Center(child: Text("error"),);
+    }
     final size = MediaQuery.of(context).size;
     return Scaffold(
         backgroundColor: Color.fromRGBO(24, 26, 49, 1),
@@ -60,6 +38,7 @@ class _PeliculaRecomendadaState extends State<PeliculaRecomendada> {
               // Si el Future está en espera, muestra un indicador de carga
               return Center(child: CircularProgressIndicator());
             } else if (snapshot.hasError) {
+              print("errooor");
               // Si hay un error en la obtención de los datos, muestra un mensaje de error
               return Center(child: Text('Error: ${snapshot.error}'));
             } else {
@@ -154,13 +133,15 @@ class _PeliculaRecomendadaState extends State<PeliculaRecomendada> {
                           actions: [
                             TextButton(
                               onPressed: () {
+                                try{
                                 setState(() {
                                   peliculas_puntuadas.add({
                                     "titulo": pelicula.obtenerTitulo(),
                                     "puntuacion": Puntuacion
                                   });
-                                  indice = indice + 1;
-                                });
+                                });}catch(error){
+                                  print(error);
+                                }
                                 Navigator.of(context).pop();
                               },
                               child: Text("aceptar"),
@@ -178,9 +159,12 @@ class _PeliculaRecomendadaState extends State<PeliculaRecomendada> {
               FloatingActionButton(
                 heroTag: "fab_next",
                 onPressed: () {
+                  try{
                   setState(() {
                     pelicula.getPeliculasData();
-                  });
+                  });}catch(error){
+                    print(error);
+                  }
                 },
                 child: const Icon(Icons.arrow_forward_outlined),
               ),

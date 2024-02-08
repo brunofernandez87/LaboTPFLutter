@@ -9,15 +9,16 @@ class PeliculaProvider extends ChangeNotifier {
   int numeroAnterior = 0;
 
   Future<void> getPeliculasData() async {
-    print(numeroAnterior);
+    try{
+    print("numero anterior $numeroAnterior");
     int random = Random().nextInt(5000);
-    print(random);
+    print("random es $random");
     if (numeroAnterior == random) {
-      print("repetido");
       random = Random().nextInt(5000);
+      numeroAnterior=random;
     }
     String id = random.toString();
-    String _baseUrl = "https://apoapi.onrender.com/v1/lapeli/$id";
+    String _baseUrl = "http://localhost:3050/v1/lapeli/$id/";
     final response = await http.get(Uri.parse(_baseUrl));
     if (response.statusCode == 200) {
       numeroAnterior = random;
@@ -26,6 +27,8 @@ class PeliculaProvider extends ChangeNotifier {
       notifyListeners();
     } else {
       throw Exception("error");
+    }}catch(error){
+      print("error al obtener los datos");
     }
   }
 
