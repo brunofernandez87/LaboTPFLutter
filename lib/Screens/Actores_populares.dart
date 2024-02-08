@@ -57,7 +57,7 @@ class _ActoresPopularesState extends State<ActoresPopulares> {
                 placeholder:
                     const AssetImage("assets/images_Peliculas/Krampus.jpg"),
                 image: NetworkImage(
-                  "https://image.tmdb.org/t/p$imagen",
+                  "https://image.tmdb.org/t/p/original$imagen",
                 ),
                 width: size.width * 0.98,
                 height: size.height * 0.7,
@@ -146,6 +146,7 @@ class _ActoresPopularesState extends State<ActoresPopulares> {
                                   "nombre": actorProvider.obtenerNombre(),
                                   "puntuacion": puntuacion
                                 });
+                                print(actoresPuntuados);
                                 indice = indice + 1;
                               });
                               Navigator.of(context).pop();
