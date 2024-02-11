@@ -15,14 +15,23 @@ class PeliculaRecomendada extends StatefulWidget {
 class _PeliculaRecomendadaState extends State<PeliculaRecomendada> {
   List peliculas_puntuadas = [];
   PeliculaProvider pelicula = PeliculaProvider();
+  @override
+  void initState() {
+    super.initState();
+    _initializeData();
+  }
+
+  Future<void> _initializeData() async {
+    try {
+      await pelicula.getPeliculasData();
+      setState(() {});
+    } catch (error) {
+      print("Error al obtener los datos: $error");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    try{
-    pelicula.getPeliculasData();
-    }catch(error){
-      Center(child: Text("error"),);
-    }
     final size = MediaQuery.of(context).size;
     return Scaffold(
         backgroundColor: Color.fromRGBO(24, 26, 49, 1),
@@ -42,7 +51,7 @@ class _PeliculaRecomendadaState extends State<PeliculaRecomendada> {
               // Si hay un error en la obtención de los datos, muestra un mensaje de error
               return Center(child: Text('Error: ${snapshot.error}'));
             } else {
-              String imagen = pelicula.obtenerURLIMagen();
+              String imagen = pelicula.imagen;
               // Si los datos se han obtenido correctamente, muestra la imagen
               return FadeInImage(
                 placeholder:
@@ -136,7 +145,7 @@ class _PeliculaRecomendadaState extends State<PeliculaRecomendada> {
                                 try{
                                 setState(() {
                                   peliculas_puntuadas.add({
-                                    "titulo": pelicula.obtenerTitulo(),
+                                    "titulo": pelicula.titulo,
                                     "puntuacion": Puntuacion
                                   });
                                 });}catch(error){

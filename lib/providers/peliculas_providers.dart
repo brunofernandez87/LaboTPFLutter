@@ -7,6 +7,8 @@ import 'dart:convert';
 class PeliculaProvider extends ChangeNotifier {
   late Map<String, dynamic> jsonData;
   int numeroAnterior = 0;
+  late String imagen;
+  late String titulo;
 
   Future<void> getPeliculasData() async {
     try{
@@ -27,18 +29,12 @@ class PeliculaProvider extends ChangeNotifier {
       String body = utf8.decode(response.bodyBytes);
       jsonData = json.decode(body);
       notifyListeners();
+      imagen=jsonData["data"]["poster_path"];
+      titulo=jsonData["data"]["original_title"];
     } else {
       throw Exception("error");
     }}catch(error){
       print("error al obtener los datos $error");
     }
-  }
-
-  String obtenerURLIMagen() {
-    return jsonData["data"]["poster_path"] ?? "";
-  }
-
-  String obtenerTitulo() {
-    return jsonData["data"]["original_title"] ?? "";
   }
 }
