@@ -26,8 +26,9 @@ class _CardImageState extends State<CardImage> {
       elevation: 10,
       child: Column(
         children: [
-          Image.asset(widget.url,
-              width: size.width * 0.98, height: size.height * 0.7),
+          FadeInImage(placeholder: const AssetImage( "assets/images_TvSeries/Stranger Things.jpg"), 
+          image: NetworkImage( "https://image.tmdb.org/t/p/w500/${widget.url}"),
+          width: size.width * 0.98, height: size.height * 0.7),
           Container(
             padding: const EdgeInsets.all(10),
             alignment: Alignment.bottomCenter,

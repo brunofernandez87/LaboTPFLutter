@@ -14,21 +14,23 @@ class PeliculaProvider extends ChangeNotifier {
     int random = Random().nextInt(5000);
     print("random es $random");
     if (numeroAnterior == random) {
+      print("es igual");
       random = Random().nextInt(5000);
       numeroAnterior=random;
     }
     String id = random.toString();
-    String _baseUrl = "http://localhost:3050/v1/lapeli/$id/";
+    String _baseUrl = "https://apoapi.onrender.com/v1/lapeli/$id";
     final response = await http.get(Uri.parse(_baseUrl));
+    numeroAnterior = random;
+    print("numero anterior se cambio a $numeroAnterior");
     if (response.statusCode == 200) {
-      numeroAnterior = random;
       String body = utf8.decode(response.bodyBytes);
       jsonData = json.decode(body);
       notifyListeners();
     } else {
       throw Exception("error");
     }}catch(error){
-      print("error al obtener los datos");
+      print("error al obtener los datos $error");
     }
   }
 

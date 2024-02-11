@@ -46,7 +46,7 @@ class _PeliculaRecomendadaState extends State<PeliculaRecomendada> {
               // Si los datos se han obtenido correctamente, muestra la imagen
               return FadeInImage(
                 placeholder:
-                    const AssetImage("assets/images_Peliculas/Flash.jpg"),
+                    const AssetImage('assets/images/loading.gif'),
                 image: NetworkImage(
                   "https://image.tmdb.org/t/p/w500/$imagen",
                 ),
