@@ -11,7 +11,7 @@ class PeliculasProvider extends ChangeNotifier {
   Future<void> getPeliculaData() async {
     try{
       String _baseUrl = "https://apoapi.onrender.com/v1/pelisdel/";
-      final url = Uri.http('localhost:3050', '/v1/pelisdel/', {'page': page.toString()});
+      final url = Uri.http('apoapi.onrender.com', '/v1/pelisdel/', {'page': page.toString()});
       final response = await http.get(url);
       print("la url es $url");
     if (response.statusCode == 200) {
