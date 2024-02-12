@@ -19,10 +19,14 @@ class _PeliculaFavoritaState extends State<PeliculaFavorita> {
   }
 
   Future<void> _refreshData() async {
+    try{
     await pelicula.getPeliculaData();
     setState(() {
       peliculas = pelicula.peliculaData;
-    });
+    });}catch(error){
+      print("hubo un error");
+      await _refreshData();
+    }
   }
   @override
   Widget build(BuildContext context) {
@@ -38,8 +42,7 @@ class _PeliculaFavoritaState extends State<PeliculaFavorita> {
             strokeWidth: 4.0,
             displacement: 40,                                
             onRefresh: () async {
-              await pelicula.getPeliculaData();
-              peliculas=pelicula.peliculaData;
+              _refreshData();
             },            
             child: 
             ListView.builder(                  

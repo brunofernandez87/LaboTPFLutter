@@ -33,7 +33,6 @@ class PeliculaProvider extends ChangeNotifier {
     }
   }
   Future<void> getPeliculaData() async {
-    try{
       String _baseUrl = "https://apoapi.onrender.com/v1/pelisdel/";
       final url = Uri.http('apoapi.onrender.com', '/v1/pelisdel/', {
         'page': page.toString(),
@@ -49,8 +48,6 @@ class PeliculaProvider extends ChangeNotifier {
       notifyListeners();
     } else {
       throw Exception("error");
-    }}catch(error){
-      print("error al obtener los datos $error");
     }
   }
   

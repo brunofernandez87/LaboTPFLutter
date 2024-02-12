@@ -29,7 +29,6 @@ class TvSerieProvider extends ChangeNotifier {
   }
 
   Future<void> getTvSeriesData() async {
-    try{
     String _baseUrl =
         "https://apoapi.onrender.com/v1/series/popularseriesfiltro/";
     final url = Uri.http('apoapi.onrender.com',
@@ -48,8 +47,6 @@ class TvSerieProvider extends ChangeNotifier {
       notifyListeners();
     } else {
       throw Exception("error");
-    }}catch(error){
-      print("ocurrio un error $error");
     }
   }
 

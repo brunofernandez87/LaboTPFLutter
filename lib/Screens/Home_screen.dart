@@ -29,13 +29,18 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       loading = true;
     });
+    try{
     await actorProvider.getActoresData();
     await pelicula.getPeliculaData();
     setState(() {
       peliculas=pelicula.listaPeliculas();
       actores=actorProvider.obtenerListaActores();
       loading=false;
-    });}
+    });}catch(error){
+      print("hubo un error $error");
+      await _refreshData();
+    }
+    }
   @override
   Widget build(BuildContext context) {
 

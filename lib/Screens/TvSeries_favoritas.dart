@@ -19,10 +19,14 @@ class _TvSeriesFavoritaState extends State<TvSeriesFavorita> {
   }
 
   Future<void> _refreshData() async {
+    try{
     await tvseries.getTvSeriesData();
     setState(() {
       TvSeries = tvseries.tvseriesLista;
-    });
+    });}catch(error){
+      print("hubo un error");
+      await _refreshData();
+    }
   }
 
   @override
@@ -39,8 +43,7 @@ class _TvSeriesFavoritaState extends State<TvSeriesFavorita> {
           strokeWidth: 4.0,
           displacement: 40,
           onRefresh: () async {
-            await tvseries.getTvSeriesData();
-            TvSeries = tvseries.tvseriesLista;
+            _refreshData();
           },
           child: ListView.builder(
             reverse: false,
