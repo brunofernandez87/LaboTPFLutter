@@ -1,9 +1,9 @@
 import 'package:app_laboflutter/Widget/Drawer_menu.dart';
 import 'package:app_laboflutter/Widget/card_swipper.dart';
-import 'package:app_laboflutter/providers/pelicula_provider.dart';
 import 'package:flutter/material.dart';
 
 import '../providers/actores_provider.dart';
+import '../providers/peliculas_providers.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -16,7 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
   ActorProvider actorProvider = ActorProvider();
   List <dynamic> peliculas=[];
   List <dynamic> actores=[];
-  PeliculasProvider pelicula=PeliculasProvider();
+  PeliculaProvider pelicula=PeliculaProvider();
   bool loading = false;
 
   @override

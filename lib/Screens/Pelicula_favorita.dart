@@ -1,7 +1,7 @@
 import 'package:app_laboflutter/Widget/Drawer_menu.dart';
 import 'package:app_laboflutter/Widget/card_image.dart';
-import 'package:app_laboflutter/providers/pelicula_provider.dart';
 import 'package:flutter/material.dart';
+import '../providers/peliculas_providers.dart';
 
 class PeliculaFavorita extends StatefulWidget {
   @override
@@ -10,7 +10,7 @@ class PeliculaFavorita extends StatefulWidget {
 
 class _PeliculaFavoritaState extends State<PeliculaFavorita> {
   List <dynamic> peliculas=[];
-  PeliculasProvider pelicula=PeliculasProvider();
+  PeliculaProvider pelicula=PeliculaProvider();
 
     @override
   void initState() {

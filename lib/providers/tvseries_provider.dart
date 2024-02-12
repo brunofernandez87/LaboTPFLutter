@@ -11,11 +11,8 @@ class TvSerieProvider extends ChangeNotifier {
   int page = 1;
 
   Future<void> getTvSerieData() async {
-    print(numeroAnterior);
     int random = Random().nextInt(5000);
-    print(random);
     if (numeroAnterior == random) {
-      print("repetido");
       random = Random().nextInt(5000);
     }
     String id = random.toString();
@@ -36,7 +33,11 @@ class TvSerieProvider extends ChangeNotifier {
     String _baseUrl =
         "https://apoapi.onrender.com/v1/series/popularseriesfiltro/";
     final url = Uri.http('apoapi.onrender.com',
-        '/v1/series/popularseriesfiltro/', {'page': page.toString()});
+        '/v1/series/popularseriesfiltro/', {
+          'page': page.toString(),
+          'language':'es'
+          }
+          );
     final response = await http.get(url);
 
     if (response.statusCode == 200) {

@@ -11,11 +11,8 @@ class ActorProvider extends ChangeNotifier {
   int page=1;
 
   Future<void> getActorData() async {
-      print(numeroAnterior);
       int random = Random().nextInt(5000);
-      print(random);
       if (numeroAnterior == random) {
-        print("repetido");
         random = Random().nextInt(5000);
       }
       String id = random.toString();

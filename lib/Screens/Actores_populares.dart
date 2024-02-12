@@ -113,7 +113,7 @@ class _ActoresPopularesState extends State<ActoresPopulares> {
                         title: Text("Actor para puntuar"),
                         content: Column(
                           children: [
-                            Text("Puntua la pelicula"),
+                            Text("Puntua al actor"),
                             RatingBar.builder(
                               initialRating: 3,
                               minRating: 1,
