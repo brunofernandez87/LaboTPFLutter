@@ -16,22 +16,28 @@ class ActoresPopulares extends StatefulWidget {
 class _ActoresPopularesState extends State<ActoresPopulares> {
   ActorProvider actorProvider = ActorProvider();
   List actoresPuntuados = [];
+  String imagen="";
+  String titulo="";
+  @override
+  void initState() {
+    super.initState();
+    _initializeData();
+  }
 
-  var random = Random();
-  var indice = 0;
-
+  Future<void> _initializeData() async {
+    try {
+      await actorProvider.getActorData();
+      setState(() {
+        imagen=actorProvider.obtenerURLIMagen();
+        titulo= actorProvider.obtenerNombre();
+      });
+    } catch (error) {
+      print("hubo un error $error");
+      await _initializeData();
+    }
+  }
   @override
   Widget build(BuildContext context) {
-    //final ActorProvider actorProvider = Provider.of<ActorProvider>(context);
-
-    //for (var i = 0; i < actorProvider.jsonData.length; i++) {
-    //  actores.add(
-    //      {"nombre": "a", "url": "assets/images_Actores/Farrah Mackenzie.jpg"});
-    //  i++;
-    //}
-
-    //print(actores);
-
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -41,30 +47,18 @@ class _ActoresPopularesState extends State<ActoresPopulares> {
           title: const Text("Actores Populares"),
         ),
         drawer: DrawerMenu(),
-        body: FutureBuilder(
-          future: actorProvider.getActorData(),
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              // Si el Future está en espera, muestra un indicador de carga
-              return Center(child: CircularProgressIndicator());
-            } else if (snapshot.hasError) {
-              // Si hay un error en la obtención de los datos, muestra un mensaje de error
-              return Center(child: Text('Error: ${snapshot.error}'));
-            } else {
-              String imagen = actorProvider.obtenerURLIMagen();
-              // Si los datos se han obtenido correctamente, muestra la imagen
-              return FadeInImage(
+        body: imagen != ""?
+        FadeInImage(
                 placeholder:
-                    const AssetImage("assets/images_Peliculas/Krampus.jpg"),
+                    const AssetImage('assets/images/loading.gif'),
                 image: NetworkImage(
-                  "https://image.tmdb.org/t/p/original$imagen",
+                  "https://image.tmdb.org/t/p/w500/${imagen}",
                 ),
                 width: size.width * 0.98,
                 height: size.height * 0.7,
-              );
-            }
-          },
-        ),
+              ):Center(
+                child: CircularProgressIndicator(),
+              ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         // floatingActionButtonAnimator:
         floatingActionButton: Container(
@@ -147,7 +141,6 @@ class _ActoresPopularesState extends State<ActoresPopulares> {
                                   "puntuacion": puntuacion
                                 });
                                 print(actoresPuntuados);
-                                indice = indice + 1;
                               });
                               Navigator.of(context).pop();
                             },
@@ -166,9 +159,7 @@ class _ActoresPopularesState extends State<ActoresPopulares> {
             FloatingActionButton(
               heroTag: "fab_next",
               onPressed: () {
-                setState(() {
-                  indice = indice + 1;
-                });
+                _initializeData();
               },
               child: const Icon(Icons.arrow_forward_outlined),
             )

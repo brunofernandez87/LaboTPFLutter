@@ -14,7 +14,6 @@ class PeliculasProvider extends ChangeNotifier {
       final url = Uri.http('apoapi.onrender.com', '/v1/pelisdel/', {'page': page.toString()});
       final response = await http.get(url);
     if (response.statusCode == 200) {
-      print("ingreso correctamente");
       String body = utf8.decode(response.bodyBytes);
       jsonData = json.decode(body);
       page++;

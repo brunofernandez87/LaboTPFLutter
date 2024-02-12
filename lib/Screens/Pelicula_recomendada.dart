@@ -15,6 +15,8 @@ class PeliculaRecomendada extends StatefulWidget {
 class _PeliculaRecomendadaState extends State<PeliculaRecomendada> {
   List peliculas_puntuadas = [];
   PeliculaProvider pelicula = PeliculaProvider();
+  String imagen="";
+  String titulo="";
   @override
   void initState() {
     super.initState();
@@ -24,14 +26,19 @@ class _PeliculaRecomendadaState extends State<PeliculaRecomendada> {
   Future<void> _initializeData() async {
     try {
       await pelicula.getPeliculasData();
-      setState(() {});
+      setState(() {
+        imagen=pelicula.imagen;
+        titulo=pelicula.titulo;
+      });
     } catch (error) {
-      print("Error al obtener los datos: $error");
+      print("hubo un error $error");
+      await _initializeData();
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    
     final size = MediaQuery.of(context).size;
     return Scaffold(
         backgroundColor: Color.fromRGBO(24, 26, 49, 1),
@@ -40,31 +47,19 @@ class _PeliculaRecomendadaState extends State<PeliculaRecomendada> {
           title: const Text("Recomendacion de peliculas"),
         ),
         drawer: DrawerMenu(),
-        body: FutureBuilder(
-          future: pelicula.getPeliculasData(),
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              // Si el Future está en espera, muestra un indicador de carga
-              return Center(child: CircularProgressIndicator());
-            } else if (snapshot.hasError) {
-              print("errooor");
-              // Si hay un error en la obtención de los datos, muestra un mensaje de error
-              return Center(child: Text('Error: ${snapshot.error}'));
-            } else {
-              String imagen = pelicula.imagen;
-              // Si los datos se han obtenido correctamente, muestra la imagen
-              return FadeInImage(
+        body:
+        imagen != ""?
+        FadeInImage(
                 placeholder:
                     const AssetImage('assets/images/loading.gif'),
                 image: NetworkImage(
-                  "https://image.tmdb.org/t/p/w500/$imagen",
+                  "https://image.tmdb.org/t/p/w500/${imagen}",
                 ),
                 width: size.width * 0.98,
                 height: size.height * 0.7,
-              );
-            }
-          },
-        ),
+              ):Center(
+                child: CircularProgressIndicator(),
+              ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         // floatingActionButtonAnimator:
         floatingActionButton: Container(
@@ -145,7 +140,7 @@ class _PeliculaRecomendadaState extends State<PeliculaRecomendada> {
                                 try{
                                 setState(() {
                                   peliculas_puntuadas.add({
-                                    "titulo": pelicula.titulo,
+                                    "titulo": titulo,
                                     "puntuacion": Puntuacion
                                   });
                                 });}catch(error){
@@ -168,12 +163,7 @@ class _PeliculaRecomendadaState extends State<PeliculaRecomendada> {
               FloatingActionButton(
                 heroTag: "fab_next",
                 onPressed: () {
-                  try{
-                  setState(() {
-                    pelicula.getPeliculasData();
-                  });}catch(error){
-                    print(error);
-                  }
+                  _initializeData();
                 },
                 child: const Icon(Icons.arrow_forward_outlined),
               ),

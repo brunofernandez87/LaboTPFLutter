@@ -11,7 +11,6 @@ class ActorProvider extends ChangeNotifier {
   int page=1;
 
   Future<void> getActorData() async {
-    try {
       print(numeroAnterior);
       int random = Random().nextInt(5000);
       print(random);
@@ -30,9 +29,6 @@ class ActorProvider extends ChangeNotifier {
       } else {
         throw Exception("error");
       }
-    } catch (error) {
-      print("error al obtener los datos");
-    }
   }
 
   Future<void> getActoresData() async {
