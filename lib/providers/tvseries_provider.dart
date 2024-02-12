@@ -32,9 +32,10 @@ class TvSerieProvider extends ChangeNotifier {
   }
 
   Future<void> getTvSeriesData() async {
-    String _baseUrl = "https://apoapi.onrender.com/v1/series/popularseries/";
-    final url = Uri.http('apoapi.onrender.com', '/v1/series/popularseries',
-        {'page': page.toString()});
+    String _baseUrl =
+        "https://apoapi.onrender.com/v1/series/popularseriesfiltro/";
+    final url = Uri.http('apoapi.onrender.com',
+        '/v1/series/popularseriesfiltro/', {'page': page.toString()});
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
