@@ -17,6 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List <dynamic> peliculas=[];
   List <dynamic> actores=[];
   PeliculasProvider pelicula=PeliculasProvider();
+  bool loading = false;
 
   @override
   void initState(){
@@ -25,11 +26,15 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
     Future<void> _refreshData() async {
+    setState(() {
+      loading = true;
+    });
     await actorProvider.getActoresData();
     await pelicula.getPeliculaData();
     setState(() {
       peliculas=pelicula.listaPeliculas();
       actores=actorProvider.obtenerListaActores();
+      loading=false;
     });}
   @override
   Widget build(BuildContext context) {
@@ -50,6 +55,9 @@ class _HomeScreenState extends State<HomeScreen> {
             width: size.width * 0.98,
             height: size.height * 0.15,
           ),
+          if (loading == true)
+            CircularProgressIndicator()
+          else
           CardSwiper(
              text: "Peliculas y TV Series",
              Lista: peliculas,
