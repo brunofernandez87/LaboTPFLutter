@@ -56,7 +56,7 @@ class _TvSeriesRecomendadaState extends State<TvSeriesRecomendada> {
                 height: size.height * 0.7,
               )
             : Center(
-                child: CircularProgressIndicator(),
+                 child: Text("hubo un problema espere o toca el boton siguiente"),
               ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         // floatingActionButtonAnimator:

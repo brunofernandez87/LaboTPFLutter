@@ -49,7 +49,7 @@ class TvSerieProvider extends ChangeNotifier {
   }
 
   String obtenerURLIMagen() {
-    return tvserieData["data"]["profile_path"] ?? "";
+    return tvserieData["data"]["poster_path"] ?? "";
   }
 
   String obtenerNombre() {
@@ -61,7 +61,7 @@ class TvSerieProvider extends ChangeNotifier {
     for (var i = 0; i < tvseriesLista.length; i++) {
       tvseries.add({
         "name": tvseriesLista[i]["name"],
-        "url": tvseriesLista[i]["profile_path"]
+        "url": tvseriesLista[i]["poster_path"]
       });
     }
     return tvseries;
