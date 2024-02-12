@@ -58,7 +58,7 @@ class _PeliculaRecomendadaState extends State<PeliculaRecomendada> {
                 width: size.width * 0.98,
                 height: size.height * 0.7,
               ):Center(
-                child: CircularProgressIndicator(),
+                child: Text("hubo un problema espere o toca el boton siguiente"),
               ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         // floatingActionButtonAnimator:
