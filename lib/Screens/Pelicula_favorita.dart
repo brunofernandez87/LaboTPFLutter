@@ -21,7 +21,7 @@ class _PeliculaFavoritaState extends State<PeliculaFavorita> {
   Future<void> _refreshData() async {
     await pelicula.getPeliculaData();
     setState(() {
-      peliculas = pelicula.listaPeliculas();
+      peliculas = pelicula.peliculaData;
     });
   }
   @override
@@ -38,17 +38,15 @@ class _PeliculaFavoritaState extends State<PeliculaFavorita> {
             strokeWidth: 4.0,
             displacement: 40,                                
             onRefresh: () async {
-              print("heey");
               await pelicula.getPeliculaData();
-              peliculas=pelicula.listaPeliculas();
+              peliculas=pelicula.peliculaData;
             },            
             child: 
             ListView.builder(                  
               reverse: false,
               physics: const BouncingScrollPhysics(),
               itemCount: peliculas.length,
-              itemBuilder: (context, index) {
-                print("en construccion paa");           
+              itemBuilder: (context, index) {        
                 return 
                 CardImage(
                   url: peliculas[index]["poster_path"],

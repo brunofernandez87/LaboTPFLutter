@@ -48,8 +48,8 @@ class CardSwiper extends StatelessWidget {
                         children: [
                           ClipRRect(
                             borderRadius: BorderRadius.circular(15),
-                            child: Image.asset(
-                              Lista[index]['url'],
+                            child: FadeInImage(placeholder: const AssetImage( "assets/images/loading.gif"), 
+                            image: NetworkImage( "https://image.tmdb.org/t/p/w500/${Lista[index]["url"]}"),
                               width: size.width * 0.37,
                               height: size.height * 0.19,
                               fit: BoxFit.cover,
@@ -61,10 +61,6 @@ class CardSwiper extends StatelessWidget {
                           Text(Lista[index]['name']),
                           const SizedBox(
                             height: 15,
-                          ),
-                          Text(
-                            Lista[index]['duration'],
-                            overflow: TextOverflow.ellipsis,
                           ),
                         ],
                       ),

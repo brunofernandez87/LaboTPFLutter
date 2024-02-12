@@ -13,23 +13,28 @@ class PeliculasProvider extends ChangeNotifier {
       String _baseUrl = "https://apoapi.onrender.com/v1/pelisdel/";
       final url = Uri.http('apoapi.onrender.com', '/v1/pelisdel/', {'page': page.toString()});
       final response = await http.get(url);
-      print("la url es $url");
     if (response.statusCode == 200) {
       print("ingreso correctamente");
       String body = utf8.decode(response.bodyBytes);
       jsonData = json.decode(body);
-      notifyListeners();
       page++;
       peliculaData=jsonData["results"];
+      notifyListeners();
     } else {
       throw Exception("error");
     }}catch(error){
       print("error al obtener los datos $error");
     }
   }
-  List<dynamic>listaPeliculas(){
-    print("pelicula data es $peliculaData");
-    return peliculaData;
+  List listaPeliculas(){
+    List peliculas=[];
+      for (var i = 0; i < peliculaData.length; i++) {
+      peliculas.add({
+        "name": peliculaData[i]["title"],
+        "url":peliculaData[i]["poster_path"]
+      });
+    }
+    return peliculas;
   }
 
 }
