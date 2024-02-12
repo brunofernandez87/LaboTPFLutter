@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 
 class CardImage extends StatefulWidget {
@@ -25,10 +27,11 @@ class _CardImageState extends State<CardImage> {
       ),
       elevation: 10,
       child: Column(
-        children: [
+        children: [ 
+          widget.url != null ? 
           FadeInImage(placeholder: const AssetImage( "assets/images/loading.gif"), 
           image: NetworkImage( "https://image.tmdb.org/t/p/w500/${widget.url}"),
-          width: size.width * 0.98, height: size.height * 0.7),
+          width: size.width * 0.98, height: size.height * 0.7):Center(child: Text("no tiene imagen de portada"),),
           Container(
             padding: const EdgeInsets.all(10),
             alignment: Alignment.bottomCenter,

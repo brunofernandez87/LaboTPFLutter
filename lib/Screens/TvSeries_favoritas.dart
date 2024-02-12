@@ -49,7 +49,7 @@ class _TvSeriesFavoritaState extends State<TvSeriesFavorita> {
             itemBuilder: (context, index) {
               return CardImage(
                 url: TvSeries[index]["poster_path"],
-                text: TvSeries[index]["title"],
+                text: TvSeries[index]["name"],
                 subtext: TvSeries[index]["overview"],
               );
             },
