@@ -42,18 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
         centerTitle: true,
       ),
       drawer: DrawerMenu(),
-      body: RefreshIndicator(
-            color: Colors.white,
-            backgroundColor: Colors.red,
-            strokeWidth: 4.0,
-            displacement: 40,                                
-            onRefresh: () async {
-              await actorProvider.getActoresData();
-              await pelicula.getPeliculaData();
-              peliculas=pelicula.listaPeliculas();
-              actores=actorProvider.obtenerListaActores();
-            },    
-      child: SingleChildScrollView(
+      body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(children: [
           Image.asset(
@@ -69,8 +58,15 @@ class _HomeScreenState extends State<HomeScreen> {
             text: "Actores",
             Lista: actores,
           )
-        ]),
+        ]
+        ),
       ),
-    ));
+      floatingActionButton: FloatingActionButton(
+    onPressed: _refreshData,
+    child: Icon(Icons.refresh),
+    backgroundColor: Colors.blue,
+  ),
+  floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+    );
   }
 }
