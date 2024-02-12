@@ -1,13 +1,12 @@
-import 'dart:html';
 
 import 'package:flutter/material.dart';
 
 class CardImage extends StatefulWidget {
-  String url;
+  String? url;
   String? text;
   String? subtext;
 
-  CardImage({super.key, required this.url, this.text, this.subtext});
+  CardImage({super.key,  this.url, this.text, this.subtext});
 
   @override
   State<CardImage> createState() => _CardImageState();
