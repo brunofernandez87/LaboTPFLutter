@@ -36,8 +36,8 @@ class ActorProvider extends ChangeNotifier {
   }
 
   Future<void> getActoresData() async {
-    String _baseUrl = "https://apoapi.onrender.com/v1/personas/popularpeople/";
-          final url = Uri.http('apoapi.onrender.com', '/v1/personas/popularpeople/', {'page': page.toString()});
+    String _baseUrl = "https://apoapi.onrender.com/v1/personas/popularpeoplefiltro/";
+          final url = Uri.http('apoapi.onrender.com', '/v1/personas/popularpeoplefiltro/', {'page': page.toString()});
       final response = await http.get(url);
 
     if (response.statusCode == 200) {
