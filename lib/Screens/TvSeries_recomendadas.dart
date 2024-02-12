@@ -1,4 +1,5 @@
 import 'package:app_laboflutter/Widget/Drawer_menu.dart';
+import 'package:app_laboflutter/providers/tvseries_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -10,56 +11,29 @@ class TvSeriesRecomendada extends StatefulWidget {
 }
 
 class _TvSeriesRecomendadaState extends State<TvSeriesRecomendada> {
-  final List tvseries = [
-    {"titulo": "The Witcher", "url": "assets/images_TvSeries/The Witcher.jpg"},
-    {
-      "titulo": "Stranger Things",
-      "url": "assets/images_TvSeries/Stranger Things.jpg"
-    },
-    {
-      "titulo": "Breaking Bad",
-      "url": "assets/images_TvSeries/Breaking Bad.jpg"
-    },
-    {
-      "titulo": "Game of Thrones",
-      "url": "assets/images_TvSeries/Game of Thrones.jpg"
-    },
-    {"titulo": "Friends", "url": "assets/images_TvSeries/Friends.jpg"},
-    {"titulo": "The Office", "url": "assets/images_TvSeries/The Office.jpg"},
-    {
-      "titulo": "Black Mirror",
-      "url": "assets/images_TvSeries/Black Mirror.jpg"
-    },
-    {"titulo": "The Crown", "url": "assets/images_TvSeries/The Crown.jpg"},
-    {"titulo": "Sherlock", "url": "assets/images_TvSeries/Sherlock.jpg"},
-    {"titulo": "Westworld", "url": "assets/images_TvSeries/Westworld.jpg"},
-    {
-      "titulo": "The Umbrella Academy",
-      "url": "assets/images_TvSeries/The Umbrella Academy.jpg"
-    },
-    {
-      "titulo": "Peaky Blinders",
-      "url": "assets/images_TvSeries/Peaky Blinders.jpg"
-    },
-    {"titulo": "Narcos", "url": "assets/images_TvSeries/Narcos.jpg"},
-    {"titulo": "Mindhunter", "url": "assets/images_TvSeries/Mindhunter.jpg"},
-    {
-      "titulo": "The Simpsons",
-      "url": "assets/images_TvSeries/The Simpsons.jpg"
-    },
-    {
-      "titulo": "The Mandalorian",
-      "url": "assets/images_TvSeries/The Mandalorian.jpg"
-    },
-    {"titulo": "Fargo", "url": "assets/images_TvSeries/Fargo.jpg"},
-    {"titulo": "Ozark", "url": "assets/images_TvSeries/Ozark.jpg"},
-    {"titulo": "Money Heist", "url": "assets/images_TvSeries/Money Heist.jpg"},
-    {
-      "titulo": "Brooklyn Nine-Nine",
-      "url": "assets/images_TvSeries/Brooklyn Nine-Nine.jpg"
-    }
-  ];
   List tvseries_puntuadas = [];
+
+  TvSerieProvider tvserie = TvSerieProvider();
+  String imagen = "";
+  String titulo = "";
+  @override
+  void initState() {
+    super.initState();
+    _initializeData();
+  }
+
+  Future<void> _initializeData() async {
+    try {
+      await tvserie.getTvSerieData();
+      setState(() {
+        imagen = tvserie.obtenerURLIMagen();
+        titulo = tvserie.obtenerNombre();
+      });
+    } catch (error) {
+      print("hubo un error $error");
+      await _initializeData();
+    }
+  }
 
   var indice = 0;
   @override
@@ -72,17 +46,18 @@ class _TvSeriesRecomendadaState extends State<TvSeriesRecomendada> {
           title: const Text("Recomendacion de TvSeries"),
         ),
         drawer: DrawerMenu(),
-        body: Center(
-          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-            if (indice < tvseries.length)
-               Image.asset(tvseries[indice]["url"],
-               width: size.width*0.98,
-               height: size.height*0.7
-               )
-            else
-              Text("No hay mas series")
-          ]),
-        ),
+        body: imagen != ""
+            ? FadeInImage(
+                placeholder: const AssetImage('assets/images/loading.gif'),
+                image: NetworkImage(
+                  "https://image.tmdb.org/t/p/w500/${imagen}",
+                ),
+                width: size.width * 0.98,
+                height: size.height * 0.7,
+              )
+            : Center(
+                child: CircularProgressIndicator(),
+              ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         // floatingActionButtonAnimator:
         floatingActionButton: Container(
@@ -161,7 +136,7 @@ class _TvSeriesRecomendadaState extends State<TvSeriesRecomendada> {
                             onPressed: () {
                               setState(() {
                                 tvseries_puntuadas.add({
-                                  "titulo": tvseries[indice]["titulo"],
+                                  "titulo": tvserie.obtenerNombre(),
                                   "puntuacion": Puntuacion
                                 });
                                 indice = indice + 1;
@@ -178,14 +153,12 @@ class _TvSeriesRecomendadaState extends State<TvSeriesRecomendada> {
               child: const Icon(
                 Icons.star,
                 color: Colors.amber,
-                ),
+              ),
             ),
             FloatingActionButton(
               heroTag: "fab_next",
               onPressed: () {
-                setState(() {
-                  indice = indice + 1;
-                });
+                _initializeData();
               },
               child: const Icon(Icons.arrow_forward_outlined),
             )
